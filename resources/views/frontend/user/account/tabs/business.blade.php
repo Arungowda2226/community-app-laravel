@@ -8,9 +8,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 mx-auto mt-5">
-            <!-- Add a search input field above the dynamic form fields -->
-            <input type="text" id="searchInput" class="form-control" placeholder="Search">
-
+           
             <form method="POST" action="/businessForm">
                 @csrf
                 <div id="formContainer">
@@ -133,35 +131,19 @@
                         </div>
                     </div>
                     <div>
-                    <button type="button" id="remove" class="btn btn-danger">remove</button>
+                    <button type="button" class="btn btn-danger remove">Remove</button>
                     </div>
-                </div>
-                <br/>
+                </div> <br/>
             `;
             $('#dynamicForm').append(newForm);
         });
 
-         $(document).on('click', '.remove', function() {
+        $(document).on('click', '.remove', function() {
             console.log("removed");
             if (formCount > 0) {
                 $(this).closest('.dynamic-form-group').remove();
                 formCount--;
             }
-        });
-
-        // Event handler for search input
-        $('#searchInput').on('keyup', function() {
-            var value = $(this).val().toLowerCase();
-
-            // Loop through each dynamic form group and hide/show based on the search input value
-            $('.dynamic-form-group').each(function() {
-                var text = $(this).text().toLowerCase();
-                if (text.includes(value)) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
         });
     });
 </script>

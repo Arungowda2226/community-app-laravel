@@ -27,7 +27,8 @@ class BusinessDetailsController extends Controller
      */
     public function create()
     {
-        //
+        $business=businessDetails::all()->toArray();
+        return view('resources.views.frontend.user.account.tabs.business',compact('business'));
     }
 
     /**

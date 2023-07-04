@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Members List</h1>
-            <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search by Name or Phone or Email" onchange="searchTable()" />
+            <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search by Name or Phone or Email" oninput="searchTable()" />
             <table class="table table-bordered data-table">
                 <thead>
                     <tr>
@@ -100,6 +100,23 @@ function showPopup(businessId) {
         }
     });
 }
+    function searchTable() {
+        var searchText = $('#searchInput').val().toLowerCase();
+        $('table.data-table tbody tr').each(function () {
+            var businessName = $(this).find('td:nth-child(3)').text().toLowerCase();
+            var businessPhone = $(this).find('td:nth-child(8)').text().toLowerCase();
+            var businessEmail = $(this).find('td:nth-child(9)').text().toLowerCase();
+            if (
+                businessName.indexOf(searchText) !== -1 ||
+                businessPhone.indexOf(searchText) !== -1 ||
+                businessEmail.indexOf(searchText) !== -1
+            ) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
 
 
 </script>
