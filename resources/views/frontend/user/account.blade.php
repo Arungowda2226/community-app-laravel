@@ -65,6 +65,16 @@
                                         aria-selected="false"/>
 
                                     <x-utils.link
+                                        :text="__('BUSINESS LIST')"
+                                        class="nav-link"
+                                        id="businessList-tab"
+                                        data-toggle="pill"
+                                        href="#businessList"
+                                        role="tab"
+                                        aria-controls="businessList"
+                                        aria-selected="false"/>
+
+                                    <x-utils.link
                                         :text="__('Edit Information')"
                                         class="nav-link"
                                         id="information-tab"
@@ -119,6 +129,9 @@
                                     @include('frontend.user.account.tabs.event')
                                 </div><!--tab-information-->
 
+                                <div class="tab-pane fade pt-3" id="businessList" role="tabpanel" aria-labelledby="businessList-tab">
+                                    @include('frontend.user.account.tabs.businessList')
+                                </div><!--tab-information-->
                                 <div class="tab-pane fade pt-3" id="information" role="tabpanel" aria-labelledby="information-tab">
                                     @include('frontend.user.account.tabs.information')
                                 </div><!--tab-information-->

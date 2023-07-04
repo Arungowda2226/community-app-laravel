@@ -21,6 +21,9 @@ Route::post('/userForm', [UserDetaiController::class, 'store']);
 Route::get('/memberList', [BusinessDetailsController::class, 'index']);
 // Route::get('/business/{id}', [BusinessDetailsController::class, 'show']);
 Route::get('/business/{id}', 'BusinessDetailsController@show');
+Route::get('/edit/{id}', 'BusinessDetailsController@update');
+Route::put('/update/{id}', 'BusinessDetailsController@updateBus');
+Route::get('/account',[UserDetaiController::class, 'index']);
 
 
 /*

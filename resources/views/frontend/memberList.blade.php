@@ -11,8 +11,6 @@
             <table class="table table-bordered data-table">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>user_id</th>
                         <th>organisation_name</th>
                         <th>organisation_address</th>
                         <th>organisation_state</th>
@@ -21,13 +19,12 @@
                         <th>organisation_phone</th>
                         <th>organisation_email</th>
                         <th>organisation_photos</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($businessDetails as $business)
                         <tr data-toggle="modal" data-target="#studentModal" onclick="showPopup({{ $business->id }})">
-                        <td>{{ $business->id }}</td>
-                        <td>{{ $business->user_id }}</td>
                         <td>{{ $business->organisation_name }}</td>
                         <td>{{ $business->organisation_address }}</td>
                         <td>{{ $business->organisation_state }}</td>
@@ -36,6 +33,11 @@
                         <td>{{ $business->organisation_phone }}</td>
                         <td>{{ $business->organisation_email }}</td>
                         <td>{{ $business->organisation_photos }}</td>
+                        <td>
+                            <a href="{{url('edit/'.$business->id)}}" class="btn btn-success">Edit</a>
+                            <a href="{{url('edit/'.$business->id)}}" class="btn btn-danger">Delete</a>
+
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

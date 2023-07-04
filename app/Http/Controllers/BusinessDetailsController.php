@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\businessDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
+use Illuminate\Support\Facades\Cache;
+
 
 
 class BusinessDetailsController extends Controller
@@ -25,11 +29,10 @@ class BusinessDetailsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $business=businessDetails::all()->toArray();
-        return view('resources.views.frontend.user.account.tabs.business',compact('business'));
-    }
+public function create()
+{ 
+    $data = Cache::get('business_details');
+}
 
     /**
      * Store a newly created resource in storage.
@@ -99,10 +102,29 @@ public function show($id)
      * @param  \App\Models\businessDetails  $businessDetails
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, businessDetails $businessDetails)
+    public function update(Request $request, businessDetails $businessDetails,$id)
     {
-        //
+        $businessEdit=businessDetails::find($id);
+        return view('frontend.user.account.tabs.edit',compact('businessEdit'));
     }
+
+public function updateBus(Request $request, businessDetails $businessDetails, $id)
+{
+    $businessUpdate = businessDetails::find($id);
+    $businessUpdate->organisation_name = $request->input('inputs.0.OrganisationName');
+    $businessUpdate->organisation_address = $request->input('inputs.0.OrganisationAddress');
+    $businessUpdate->organisation_state = $request->input('inputs.0.OrganisationState');
+    $businessUpdate->organisation_city = $request->input('inputs.0.OrganisationCity');
+    $businessUpdate->organisation_country = $request->input('inputs.0.OrganisationCountry');
+    $businessUpdate->organisation_phone = $request->input('inputs.0.OrganisationPhone');
+    $businessUpdate->organisation_email = $request->input('inputs.0.OrganisationEmail');
+    $businessUpdate->organisation_photos = $request->input('inputs.0.OrganisationPhotos');
+
+    $businessUpdate->update();
+    return redirect('/')->with('status', 'Data updated successfully');
+}
+
+
 
     /**
      * Remove the specified resource from storage.
