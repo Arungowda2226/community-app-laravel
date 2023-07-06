@@ -40,9 +40,8 @@ class AccountController
         }
         return redirect("/account#business")->with('status', 'The post has been added!');
     }
-    public function view(){
-        $user_id = Auth::id();
-        $business_details = businessDetails::where('user_id', $user_id)->get();
-        return view('frontend.user.account', compact('business_details'));
-    }
 }
+
+
+
+
