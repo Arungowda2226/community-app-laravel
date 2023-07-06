@@ -16,7 +16,8 @@ class UserDetailsController extends Controller
      */
     public function index()
     {
-        //
+         $businessDetails=user_detais::simplePaginate(10);
+            return view('frontend.allMemberList', compact('businessDetails'));
     }
 
     /**

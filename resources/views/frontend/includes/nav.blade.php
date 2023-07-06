@@ -97,7 +97,9 @@
                     </li>
                 @endguest
             </ul>
-            <a href="/memberList">MemberList</a>
+            <a href="/memberList" class="mr-2">MemberList</a>
+            <a href="/allMember" class="ml-2">AllMemberList</a>
+            <a href="/busin" class="ml-2">AllMemberList</a>
         </div><!--navbar-collapse-->
     </div><!--container-->
 </nav>

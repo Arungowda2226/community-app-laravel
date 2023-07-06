@@ -11,10 +11,8 @@
                         <th>organisation_country</th>
                         <th>organisation_phone</th>
                         <th>organisation_email</th>
-                        <th>organisation_photos</th>
                     </tr>
                     <tr>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>

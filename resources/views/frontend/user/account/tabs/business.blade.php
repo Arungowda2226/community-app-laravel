@@ -11,62 +11,65 @@
            
             <form method="POST" action="/businessForm">
                 @csrf
+                
                 <div id="formContainer">
                     <div class="form-group row">
                         <label for="OrganisationName" class="col-sm-4 col-form-label">Organisation Name</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[0][OrganisationName]" placeholder="Enter Organisation Name">
+                            <input type="text" class="form-control" name="inputs[0][organisation_name]"  placeholder="Enter Organisation Name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="OrganisationAddress" class="col-sm-4 col-form-label">Organisation Address</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[0][OrganisationAddress]" placeholder="Enter Organisation Address">
+                            <input type="text" class="form-control" name="inputs[0][organisation_address]" placeholder="Enter Organisation Address">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="OrganisationState" class="col-sm-4 col-form-label">Organisation State</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[0][OrganisationState]" placeholder="Enter Organisation State">
+                            <input type="text" class="form-control" name="inputs[0][organisation_state]" placeholder="Enter Organisation State">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="OrganisationCity" class="col-sm-4 col-form-label">Organisation City</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[0][OrganisationCity]" placeholder="Enter Organisation City">
+                            <input type="text" class="form-control" name="inputs[0][organisation_city]" placeholder="Enter Organisation City">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="OrganisationCountry" class="col-sm-4 col-form-label">Organisation Country</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[0][OrganisationCountry]" placeholder="Enter Organisation Country">
+                            <input type="text" class="form-control" name="inputs[0][organisation_country]" placeholder="Enter Organisation Country">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="OrganisationPhone" class="col-sm-4 col-form-label">Organisation Phone</label>
                         <div class="col-sm-8">
-                            <input type="tel" class="form-control" name="inputs[0][OrganisationPhone]" placeholder="Enter Organisation Phone">
+                            <input type="tel" class="form-control" name="inputs[0][organisation_phone]" placeholder="Enter Organisation Phone">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="OrganisationEmail" class="col-sm-4 col-form-label">Organisation Email</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[0][OrganisationEmail]" placeholder="Enter Organisation Email">
+                            <input type="text" class="form-control" name="inputs[0][organisation_email]" placeholder="Enter Organisation Email">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="OrganisationPhotos" class="col-sm-4 col-form-label">Organisation Photos</label>
                         <div class="col-sm-8">
-                            <input type="file" class="form-control" name="inputs[0][OrganisationPhotos]" accept="image/*">
+                            <input type="file" class="form-control" name="inputs[0][organisation_photos]" accept="image/*">
                         </div>
                     </div>
                 </div>
+                
                 <div id="dynamicForm">
 
                 </div>
 
                 <button type="button" id="add" class="btn btn-warning">Add+</button>
                 <button type="submit" class="btn btn-primary">Submit</button>
+                
             </form>
         </div>
     </div>
@@ -85,49 +88,49 @@
                     <div class="form-group row">
                         <label for="OrganisationName${formCount}" class="col-sm-4 col-form-label">Organisation Name</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[${formCount}][OrganisationName]" placeholder="Enter Organisation Name">
+                            <input type="text" class="form-control" name="inputs[${formCount}][organisation_name]" placeholder="Enter Organisation Name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="OrganisationAddress${formCount}" class="col-sm-4 col-form-label">Organisation Address</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[${formCount}][OrganisationAddress]" placeholder="Enter Organisation Address">
+                            <input type="text" class="form-control" name="inputs[${formCount}][organisation_address]" placeholder="Enter Organisation Address">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="OrganisationState${formCount}" class="col-sm-4 col-form-label">Organisation State</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[${formCount}][OrganisationState]" placeholder="Enter Organisation State">
+                            <input type="text" class="form-control" name="inputs[${formCount}][organisation_state]" placeholder="Enter Organisation State">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="OrganisationCity${formCount}" class="col-sm-4 col-form-label">Organisation City</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[${formCount}][OrganisationCity]" placeholder="Enter Organisation City">
+                            <input type="text" class="form-control" name="inputs[${formCount}][organisation_city]" placeholder="Enter Organisation City">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="OrganisationCountry${formCount}" class="col-sm-4 col-form-label">Organisation Country</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[${formCount}][OrganisationCountry]" placeholder="Enter Organisation Country">
+                            <input type="text" class="form-control" name="inputs[${formCount}][organisation_country]" placeholder="Enter Organisation Country">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="OrganisationPhone${formCount}" class="col-sm-4 col-form-label">Organisation Phone</label>
                         <div class="col-sm-8">
-                            <input type="tel" class="form-control" name="inputs[${formCount}][OrganisationPhone]" placeholder="Enter Organisation Phone">
+                            <input type="tel" class="form-control" name="inputs[${formCount}][organisation_phone]" placeholder="Enter Organisation Phone">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="OrganisationEmail${formCount}" class="col-sm-4 col-form-label">Organisation Email</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[${formCount}][OrganisationEmail]" placeholder="Enter Organisation Email">
+                            <input type="text" class="form-control" name="inputs[${formCount}][organisation_email]" placeholder="Enter Organisation Email">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="OrganisationPhotos${formCount}" class="col-sm-4 col-form-label">Organisation Photos</label>
                         <div class="col-sm-8">
-                            <input type="file" class="form-control" name="inputs[${formCount}][OrganisationPhotos]" accept="image/*">
+                            <input type="file" class="form-control" name="inputs[${formCount}][organisation_photos]" accept="image/*">
                         </div>
                     </div>
                     <div>

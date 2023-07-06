@@ -18,21 +18,31 @@ class BusinessDetailsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $businessDetails=businessDetails::simplePaginate(2);
-        return view('frontend.memberList', compact('businessDetails'));
-    }
+        public function index()
+        {
+            $user_id = Auth::id();
+            $businessDetails = businessDetails::where('user_id', $user_id)->simplePaginate(2);
+            return view('frontend.memberList', compact('businessDetails'));
+        }
+
+        public function allData()
+        {
+            $businessDetails=businessDetails::all();
+            return view('frontend.list', compact('businessDetails'));
+        }
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-public function create()
-{ 
-    $data = Cache::get('business_details');
-}
+    public function create()
+    {
+        $user_id = Auth::id();
+        $businessDetails = businessDetails::where('user_id', $user_id)->get();
+        return view('business', compact('businessDetails'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -43,20 +53,19 @@ public function create()
     public function store(Request $request)
     {
         $request->validate([
-        'inputs.*.organisation_name' => 'required'
-        ], [
-            'inputs.*.organisation_name' => 'The organisation_name field is required'
+            'inputs.*.organisation_name' => 'required',
+            'inputs.*.organisation_address' => 'required',
+            // Add validation rules for other fields here
         ]);
 
         $user_id = Auth::id();
 
         foreach ($request->inputs as $key => $value) {
-            $value['user_id'] = $user_id; 
-
+            $value['user_id'] = $user_id;
             businessDetails::create($value);
         }
 
-        return back()->with('success', 'The post has been added!');
+        return redirect("/account#business")->with('status', 'The post has been added!');
     }
 
     /**
@@ -87,13 +96,13 @@ public function show($id)
      * @param  \App\Models\businessDetails  $businessDetails
      * @return \Illuminate\Http\Response
      */
-    public function edit(businessDetails $businessDetails)
-    {
-        $user_id = Auth::id();
-        $businessDetails = businessDetails::where('user_id', $user_id)->get();
-        return view('frontend.user.account.tabs.business', compact('businessDetails'));
+public function edit()
+{
+    $user_id = Auth::id();
+    $businessDetails = businessDetails::where('user_id', $user_id)->get();
+    return view('frontend.user.account.tabs.edit', compact('businessDetails'));
+}
 
-    }
 
     /**
      * Update the specified resource in storage.
@@ -102,11 +111,26 @@ public function show($id)
      * @param  \App\Models\businessDetails  $businessDetails
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, businessDetails $businessDetails,$id)
+    public function update(Request $request, $id)
     {
-        $businessEdit=businessDetails::find($id);
-        return view('frontend.user.account.tabs.edit',compact('businessEdit'));
+        $business = businessDetails::find($id);
+
+        if (!$business) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Business not found',
+            ], 404);
+        }
+
+        $business->organisation_name = $request->input("inputs.$id.organisation_name");
+        $business->organisation_address = $request->input("inputs.$id.organisation_address");
+        // Update other fields here
+
+        $business->save();
+
+        return redirect('/memberList')->with('status', 'Data updated successfully');
     }
+
 
 public function updateBus(Request $request, businessDetails $businessDetails, $id)
 {
@@ -121,7 +145,7 @@ public function updateBus(Request $request, businessDetails $businessDetails, $i
     $businessUpdate->organisation_photos = $request->input('inputs.0.OrganisationPhotos');
 
     $businessUpdate->update();
-    return redirect('/')->with('status', 'Data updated successfully');
+    return redirect('/memberList')->with('status', 'Data updated successfully');
 }
 
 
@@ -132,8 +156,20 @@ public function updateBus(Request $request, businessDetails $businessDetails, $i
      * @param  \App\Models\businessDetails  $businessDetails
      * @return \Illuminate\Http\Response
      */
-    public function destroy(businessDetails $businessDetails)
+    public function destroy(businessDetails $businessDetails,$id)
     {
-        //
+        $businessDelete=businessDetails::find($id);
+        $businessDelete->delete();
+        return redirect('/memberList')->with('status', 'Data delete successfully');
+
     }
+
+        public function destroyBusiness(businessDetails $businessDetails,$id)
+    {
+        // $businessDelete=businessDetails::find($id);
+        $businessDelete->delete();
+        return redirect('/memberList')->with('status', 'Data delete successfully');
+
+    }
+    
 }

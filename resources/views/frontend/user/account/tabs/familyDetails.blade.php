@@ -9,7 +9,7 @@
 <body>
     <div>
         <div>
-            <form method="POST" action="/navigate" enctype="multipart/form-data">
+            <form method="POST" action="/familySumbit" enctype="multipart/form-data">
                 @csrf
                 <div id="formContainer">
                     <div class="form-section" id="mainForm">
@@ -39,7 +39,7 @@
                             </tr>
                             <tr>
                                 <th>@lang('DOB')</th>
-                                <td><input type="date" class="form-control" id="dob" name="inputs[0][dob]" placeholder="Enter DOB"></td>
+                                <td><input type="date" class="form-control" id="DOB" name="inputs[0][DOB]" placeholder="Enter DOB"></td>
                             </tr>
                             <tr>
                                 <th>@lang('Married')</th>
@@ -51,11 +51,11 @@
                             </tr>
                             <tr>
                                 <th>@lang('Origin City')</th>
-                                <td><input type="text" class="form-control" id="originCity" name="inputs[0][originCity]" placeholder="Enter OriginCity"></td>
+                                <td><input type="text" class="form-control" id="originCity" name="inputs[0][origin_city]" placeholder="Enter OriginCity"></td>
                             </tr>
                             <tr>
                                 <th>@lang('Blood Group')</th>
-                                <td><input type="text" class="form-control" id="bloodGroup" name="inputs[0][bloodGroup]" placeholder="Enter BloodGroup"></td>
+                                <td><input type="text" class="form-control" id="bloodGroup" name="inputs[0][blood_group]" placeholder="Enter BloodGroup"></td>
                             </tr>
                         </table>
                     </div>
@@ -106,7 +106,7 @@
                     </tr>
                     <tr>
                         <th>@lang('DOB')</th>
-                        <td><input type="date" class="form-control" id="dob" name="inputs[${formCount}][dob]" placeholder="Enter DOB"></td>
+                        <td><input type="date" class="form-control" id="DOB" name="inputs[${formCount}][DOB]" placeholder="Enter DOB"></td>
                     </tr>
                     <tr>
                         <th>@lang('Married')</th>

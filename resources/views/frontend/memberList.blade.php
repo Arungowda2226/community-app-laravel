@@ -34,11 +34,12 @@
                         <td>{{ $business->organisation_email }}</td>
                         <td>{{ $business->organisation_photos }}</td>
                         <td>
-                            <a href="{{url('edit/'.$business->id)}}" class="btn btn-success">Edit</a>
-                            <a href="{{url('edit/'.$business->id)}}" class="btn btn-danger">Delete</a>
-
+                            <div class="btn-group">
+                                <a href="{{ url('edit/'.$business->id) }}" class="btn btn-success">Edit</a>
+                                <a href="{{ url('delete/'.$business->id) }}" class="btn btn-danger">Delete</a>
+                            </div>
                         </td>
-                    </tr>
+                         </tr>
                     @endforeach
                 </tbody>
             </table>

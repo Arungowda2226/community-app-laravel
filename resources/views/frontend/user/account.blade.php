@@ -123,6 +123,7 @@
 
                                 <div class="tab-pane fade pt-3" id="business" role="tabpanel" aria-labelledby="business-tab">
                                     @include('frontend.user.account.tabs.business')
+
                                 </div><!--tab-information-->
 
                                 <div class="tab-pane fade pt-3" id="event" role="tabpanel" aria-labelledby="event-tab">

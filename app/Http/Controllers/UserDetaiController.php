@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\user_detai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserDetaiController extends Controller
 {
@@ -15,7 +16,8 @@ class UserDetaiController extends Controller
      */
     public function index()
     {
-        //
+      $userDetails=user_detai::simplePaginate(10);
+      return view('frontend.allMemberList', compact('userDetails'));
     }
 
     /**
