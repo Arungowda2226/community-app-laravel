@@ -1,242 +1,231 @@
-<html>
-<head>
-    <title>Business Form</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 mx-auto mt-5">
-           
-            <form id="businessForm" method="POST" action="/businessForm">
-                 @method('POST')
-                @csrf
-                @foreach($business_details as $index => $business)
-                <div id="formContainer">
-                    <div class="form-group row">
-                        <label for="OrganisationName" class="col-sm-4 col-form-label">Organisation Name</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control"   value="{{$business->organisation_name}}" placeholder="Enter Organisation Name">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="OrganisationAddress" class="col-sm-4 col-form-label">Organisation Address</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control"  value="{{$business->organisation_address}}" placeholder="Enter Organisation Address">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="OrganisationState" class="col-sm-4 col-form-label">Organisation State</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control"  value="{{$business->organisation_state}}" placeholder="Enter Organisation State">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="OrganisationCity" class="col-sm-4 col-form-label">Organisation City</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control"  value="{{$business->organisation_city}}" placeholder="Enter Organisation City">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="OrganisationCountry" class="col-sm-4 col-form-label">Organisation Country</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control"  value="{{$business->organisation_country}}" placeholder="Enter Organisation Country">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="OrganisationPhone" class="col-sm-4 col-form-label">Organisation Phone</label>
-                        <div class="col-sm-8">
-                            <input type="tel" class="form-control"  value="{{$business->organisation_phone}}" placeholder="Enter Organisation Phone">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="OrganisationEmail" class="col-sm-4 col-form-label">Organisation Email</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control"  value="{{$business->organisation_email}}" placeholder="Enter Organisation Email">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="OrganisationPhotos" class="col-sm-4 col-form-label">Organisation Photos</label>
-                        <div class="col-sm-8">
-                            <input type="file" class="form-control"  value="{{$business->organisation_photos}}" accept="image/*">
-                        </div>
-                    </div>
-                </div>
-                <input type="hidden" name="inputs[{{$index}}][form_id]" value="{{$business->id}}">
-                <button type="button" class="btn btn-danger removeMain" data-index="{{$index}}" >remove</button>
-                <br><br>
-                
-                  @endforeach
-                  
-                <div id="dynamicForm">
-
-                </div>
-               <div class="container">
-                <div class="row">
-                    <div class="col text-start">
-                    <button type="button" id="updateButton" class="btn btn-warning">Update</button>
-                    </div>
-                    <div class="col text-center">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                    </div>
-                    <div class="col text-end">
-                        <button type="button" id="add" class="btn btn-primary">Add+</button>
-                    </div>
-                </div>
-              </div>
-
-            </form>
+<div class="table-responsive">
+    @if ($business_details->isEmpty())
+        <form action="businessForm" method='post'>
+        @csrf
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered mb-0">
+                <tr>
+                    <th>organisation_name</th>
+                    <td><input type="text" class="form-control" id="organisation_name" name="inputs[0][organisation_name]" placeholder="Enter organisation_name"></td>
+                </tr>
+                <tr>
+                    <th>organisation_address</th>
+                    <td><input type="text" class="form-control" id="organisation_address" name="inputs[0][organisation_address]" placeholder="Enter organisation_address"></td>
+                </tr>
+                <tr>
+                    <th>organisation_state</th>
+                    <td><input type="text" class="form-control" id="organisation_state" name="inputs[0][organisation_state]" placeholder="Enter organisation_state"></td>
+                </tr>
+                <tr>
+                    <th>organisation_city</th>
+                    <td><input type="text" class="form-control" id="organisation_city" name="inputs[0][organisation_city]" placeholder="Enter organisation_city"></td>
+                </tr>
+                <tr>
+                    <th>organisation_country</th>
+                    <td><input type="text" class="form-control" id="organisation_country" name="inputs[0][organisation_country]" placeholder="Enter organisation_country"></td>
+                </tr>
+                <tr>
+                    <th>organisation_phone</th>
+                    <td><input type="text" class="form-control" id="organisation_phone" name="inputs[0][organisation_phone]" placeholder="Enter organisation_phone"></td>
+                </tr>
+                <tr>
+                    <th>organisation_email</th>
+                    <td><input type="text" class="form-control" id="organisation_email" name="inputs[0][organisation_email]" placeholder="Enter organisation_email"></td>
+                </tr>
+                <tr>
+                    <th>organisation_photos</th>
+                    <td><input type="file" class="form-control" id="organisation_photos" name="inputs[0][organisation_photos]" ></td>
+                </tr>
+            </table>
         </div>
-    </div>
+        <br>
+        <div class="text-center">
+        <button type="submit" class="btn btn-success col-md-2">Save</button>
+        </div>
+        </form>
+
+    @else
+        @foreach($business_details as $index => $business)
+            <form action="{{url('updateBusiness/'.$business->id)}}" method="post">
+                {{csrf_field()}}
+                @method('PUT')
+                @csrf
+                <input type="hidden" name="user_id[]" value="{{ $business->id }}">
+                <table id="business_table{{$index}}" class="table table-striped table-hover table-bordered mb-0">
+                    <tr>
+                        <th>organisation_name</th>
+                        <td><input type="text" class="form-control" value="{{ $business->organisation_name }}" id="organisation_name" name="inputs[{{ $index }}][organisation_name]" placeholder="Enter Name"></td>
+                    </tr>
+                    <tr>
+                        <th>organisation_address</th>
+                        <td><input type="text" class="form-control" value="{{ $business->organisation_address }}" id="organisation_address" name="inputs[{{ $index }}][organisation_address]" placeholder="Enter organisation_address"></td>
+                    </tr>
+                    <tr>
+                        <th>organisation_state</th>
+                        <td><input type="text" class="form-control" value="{{ $business->organisation_state }}" id="organisation_state" name="inputs[{{ $index }}][organisation_state]" placeholder="Enter organisation_state"></td>
+                    </tr>
+                    <tr>
+                        <th>organisation_city</th>
+                        <td><input type="text" class="form-control" value="{{ $business->organisation_city }}" id="organisation_city" name="inputs[{{ $index }}][organisation_city]" placeholder="Enter organisation_city"></td>
+                    </tr>
+                    <tr>
+                        <th>organisation_country</th>
+                        <td><input type="text" class="form-control" value="{{ $business->organisation_country }}" id="organisation_country" name="inputs[{{ $index }}][organisation_country]" placeholder="Enter organisation_country"></td>
+                    </tr>
+                    <tr>
+                        <th>organisation_phone</th>
+                        <td><input type="text" class="form-control" value="{{ $business->organisation_phone }}" id="organisation_phone" name="inputs[{{ $index }}][organisation_phone]" placeholder="Enter organisation_phone"></td>
+                    </tr>
+                    <tr>
+                        <th>organisation_email</th>
+                        <td><input type="text" class="form-control" value="{{ $business->organisation_email }}" id="organisation_email" name="inputs[{{ $index }}][organisation_email]" placeholder="Enter organisation_email"></td>
+                    </tr>
+                    <tr>
+                        <th>organisation_photos</th>
+                        <td><input type="file" class="form-control" value="{{ $business->organisation_photos }}" id="organisation_photos" name="inputs[{{ $index }}][organisation_photos]" ></td>
+                    </tr>
+                    <tr>
+                        <th>
+                        <button type="button" class="btn btn-danger removeBusForm float-right" data-index="{{ $index }}">Remove -</button>
+                        </th>
+                    </tr>          
+                </table>
+                <br><br>
+                 @endforeach
+                <br>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success col-md-2">UPDATE</button>
+                </div>
+            </form>
+       <br><br>
+    @endif
+            <form action="businessForm" method='post'>
+        @csrf
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered mb-0">
+                <tr>
+                    <th>organisation_name</th>
+                    <td><input type="text" class="form-control" id="organisation_name" name="inputs[0][organisation_name]" placeholder="Enter organisation_name"></td>
+                </tr>
+                <tr>
+                    <th>organisation_address</th>
+                    <td><input type="text" class="form-control" id="organisation_address" name="inputs[0][organisation_address]" placeholder="Enter organisation_address"></td>
+                </tr>
+                <tr>
+                    <th>organisation_state</th>
+                    <td><input type="text" class="form-control" id="organisation_state" name="inputs[0][organisation_state]" placeholder="Enter organisation_state"></td>
+                </tr>
+                <tr>
+                    <th>organisation_city</th>
+                    <td><input type="text" class="form-control" id="organisation_city" name="inputs[0][organisation_city]" placeholder="Enter organisation_city"></td>
+                </tr>
+                <tr>
+                    <th>organisation_country</th>
+                    <td><input type="text" class="form-control" id="organisation_country" name="inputs[0][organisation_country]" placeholder="Enter organisation_country"></td>
+                </tr>
+                <tr>
+                    <th>organisation_phone</th>
+                    <td><input type="text" class="form-control" id="organisation_phone" name="inputs[0][organisation_phone]" placeholder="Enter organisation_phone"></td>
+                </tr>
+                <tr>
+                    <th>organisation_email</th>
+                    <td><input type="text" class="form-control" id="organisation_email" name="inputs[0][organisation_email]" placeholder="Enter organisation_email"></td>
+                </tr>
+                <tr>
+                    <th>organisation_photos</th>
+                    <td><input type="file" class="form-control" id="organisation_photos" name="inputs[0][organisation_photos]" ></td>
+                </tr>
+            </table>
+            <br>
+            <table id="dynamic_business" class="table table-striped table-hover table-bordered mb-0">
+                            
+            </table>
+            
+        </div>
+        <br>
+        <div class="row">
+        <button type="button" id="addMoreBusiness" class="btn btn-primary float-right col-md-2">Add more +</button>
+        <div class="text-center">
+        <button type="submit" class="btn btn-success col-md-2">Save</button>
+        </div>
+        </div>
+        </form>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        var formCount = 0;
-
-        $('#add').click(function() {
-            formCount++;
-            var newForm = `
-            <div class="my-4"></div>
-                <div class="dynamic-form-group">
-                    <div class="form-group row">
-                        <label for="OrganisationName${formCount}" class="col-sm-4 col-form-label">Organisation Name</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[${formCount}][organisation_name]" placeholder="Enter Organisation Name">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="OrganisationAddress${formCount}" class="col-sm-4 col-form-label">Organisation Address</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[${formCount}][organisation_address]" placeholder="Enter Organisation Address">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="OrganisationState${formCount}" class="col-sm-4 col-form-label">Organisation State</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[${formCount}][organisation_state]" placeholder="Enter Organisation State">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="OrganisationCity${formCount}" class="col-sm-4 col-form-label">Organisation City</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[${formCount}][organisation_city]" placeholder="Enter Organisation City">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="OrganisationCountry${formCount}" class="col-sm-4 col-form-label">Organisation Country</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[${formCount}][organisation_country]" placeholder="Enter Organisation Country">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="OrganisationPhone${formCount}" class="col-sm-4 col-form-label">Organisation Phone</label>
-                        <div class="col-sm-8">
-                            <input type="tel" class="form-control" name="inputs[${formCount}][organisation_phone]" placeholder="Enter Organisation Phone">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="OrganisationEmail${formCount}" class="col-sm-4 col-form-label">Organisation Email</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[${formCount}][organisation_email]" placeholder="Enter Organisation Email">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="OrganisationPhotos${formCount}" class="col-sm-4 col-form-label">Organisation Photos</label>
-                        <div class="col-sm-8">
-                            <input type="file" class="form-control" name="inputs[${formCount}][organisation_photos]" accept="image/*">
-                        </div>
-                    </div>
-                    <div>
-                    <button type="button" class="btn btn-danger remove">Remove</button>
-                    </div>
-                </div> 
-                <div class="my-4"></div>
-            `;
-            $('#dynamicForm').append(newForm);
-        });
-
-        $(document).on('click', '.remove', function() {
-            console.log("removed");
-            if (formCount > 0) {
-                $(this).closest('.dynamic-form-group').remove();
-                formCount--;
-            }
-        });
-        $(document).on('click', '.removeMain', function() {
-            var index = $(this).data('index');
-            var formId = $('input[name="inputs[' + index + '][form_id]"]').val();
-            var confirmation = confirm("Are you sure you want to remove");
-            if (confirmation === true) {
-            $('#formContainer' + index).remove();
-
-            $.ajax({
-                url: '/delete/' + formId,
-                type: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    _method: 'DELETE'
-                },
-                success: function(response) {
-                    console.log("deleted");
-                },
-                error: function(xhr) {
-                    console.log(xhr.responseText);
-                }
+    <script>
+         $(document).ready(function() {
+            var formCount = 0;
+            $('#addMoreBusiness').click(function() {
+                formCount++;
+                var newForm = `
+                <br/>
+				<table class="table table-striped table-hover table-bordered mb-0">
+                <tr>
+                    <th>organisation_name</th>
+                    <td><input type="text" class="form-control" id="organisation_name" name="inputs[${formCount}][organisation_name]" placeholder="Enter organisation_name"></td>
+                </tr>
+                <tr>
+                    <th>organisation_address</th>
+                    <td><input type="text" class="form-control" id="organisation_address" name="inputs[${formCount}][organisation_address]" placeholder="Enter organisation_address"></td>
+                </tr>
+                <tr>
+                    <th>organisation_state</th>
+                    <td><input type="text" class="form-control" id="organisation_state" name="inputs[${formCount}][organisation_state]" placeholder="Enter organisation_state"></td>
+                </tr>
+                <tr>
+                    <th>organisation_city</th>
+                    <td><input type="text" class="form-control" id="organisation_city" name="inputs[${formCount}][organisation_city]" placeholder="Enter organisation_city"></td>
+                </tr>
+                <tr>
+                    <th>organisation_country</th>
+                    <td><input type="text" class="form-control" id="organisation_country" name="inputs[${formCount}][organisation_country]" placeholder="Enter organisation_country"></td>
+                </tr>
+                <tr>
+                    <th>organisation_phone</th>
+                    <td><input type="text" class="form-control" id="organisation_phone" name="inputs[${formCount}][organisation_phone]" placeholder="Enter organisation_phone"></td>
+                </tr>
+                <tr>
+                    <th>organisation_email</th>
+                    <td><input type="text" class="form-control" id="organisation_email" name="inputs[${formCount}][organisation_email]" placeholder="Enter organisation_email"></td>
+                </tr>
+                <tr>
+                    <th>organisation_photos</th>
+                    <td><input type="file" class="form-control" id="organisation_photos" name="inputs[${formCount}][organisation_photos]" ></td>
+                </tr>
+                    <tr>
+                    <th>
+                    <button type="button" class="btn btn-danger remove-business-table float-right">Remove -</button>
+                    </th>
+                    </tr>
+                </table>
+                `;
+                $('#dynamic_business').append(newForm);
             });
-        }
-        });
 
-        
-    $('#updateButton').click(function() {
-        // Create an empty array to store the form data
-        var formData = [];
-
-        // Loop through each form container
-        $('.formContainer').each(function(index) {
-            // Create an empty object to store the form data for the current container
-            var form = {};
-
-            // Get the values from the input fields within the current container
-            form.organisation_name = $(this).find('input[name="inputs[' + index + '][organisation_name]"]').val();
-            form.organisation_address = $(this).find('input[name="inputs[' + index + '][organisation_address]"]').val();
-            form.organisation_state = $(this).find('input[name="inputs[' + index + '][organisation_state]"]').val();
-            form.organisation_city = $(this).find('input[name="inputs[' + index + '][organisation_city]"]').val();
-            form.organisation_country = $(this).find('input[name="inputs[' + index + '][organisation_country]"]').val();
-            form.organisation_phone = $(this).find('input[name="inputs[' + index + '][organisation_phone]"]').val();
-            form.organisation_email = $(this).find('input[name="inputs[' + index + '][organisation_email]"]').val();
-            // Add more form fields if needed
-
-            // Push the form data object to the array
-            formData.push(form);
-            
-        });
-            
-        // Send the form data to the server using AJAX
-        $.ajax({
-            url: '/update', // Replace with your server-side route
-            type: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                formData: formData
-            },
-            success: function(response) {
-                console.log(formData);
-                console.log("Data updated successfully");
-                // Handle the success response as needed
-            },
-            error: function(xhr) {
-                console.log(formData);
-                console.log(xhr.responseText);
-                // Handle the error response as needed
-            }
-        });
-    });
+            $(document).on('click', '.remove-business-table', function() {
+                $(this).closest('table').remove();
+            });
 
 
-    });
-</script>
-</body>
-</html>
+			$(document).on('click', '.removeBusForm', function() {
+                var index = $(this).data('index');
+                console.log(index);
+                var formId = $('input[name="user_id[]"]').eq(index).val();
+                console.log(formId);
+                $.ajax({
+                    url: '/deleteBusiness/' + formId,
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: { formId: formId },
+                    success: function(response) {
+                        $('#business_table' + index).remove();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    }
+                });
+            });
+			});
+    </script>

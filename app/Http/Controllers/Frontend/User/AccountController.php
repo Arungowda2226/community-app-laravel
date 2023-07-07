@@ -33,35 +33,31 @@ class AccountController
         }
 
 
-public function deleteFamily(Request $request, $id)
-{
-    try {
-        family_details::where('id', $id)->delete();
-        return response()->json(['message' => 'Family member deleted successfully']);
-    } catch (\Exception $e) {
-        return response()->json(['error' => 'Failed to delete family member'], 500);
-    }
-}
-
-
-
-
-
-    public function store(Request $request)
-    {
-        $request->validate([
-        'inputs.*.organisation_name' => 'required',
-        'inputs.*.organisation_address' => 'required',
-
-        ]);
-
-        $user_id = Auth::id();
-        foreach ($request->inputs as $key => $value) {
-        $value['user_id'] = $user_id;
-        businessDetails::create($value);
+        public function deleteFamily(Request $request, $id)
+        {
+            try {
+                family_details::where('id', $id)->delete();
+                return response()->json(['message' => 'Family member deleted successfully']);
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Failed to delete family member'], 500);
+            }
         }
-        return redirect("/account#business")->with('status', 'The post has been added!');
-    }
+
+        public function store(Request $request)
+        {
+            $request->validate([
+            'inputs.*.organisation_name' => 'required',
+            'inputs.*.organisation_address' => 'required',
+
+            ]);
+
+            $user_id = Auth::id();
+            foreach ($request->inputs as $key => $value) {
+            $value['user_id'] = $user_id;
+            businessDetails::create($value);
+            }
+            return redirect("/account#business")->with('status', 'The post has been added!');
+        }
 
         public function updateFamaily(Request $request)
         {
@@ -120,6 +116,36 @@ public function deleteFamily(Request $request, $id)
 
             $user->update();
             return redirect('/account#user')->with('status', 'User details updated successfully.');
+        }
+
+        public function updateBusiness(Request $request)
+        {
+            $userIds = $request->input('user_id');
+            $inputs = $request->input('inputs');
+            foreach ($userIds as $index => $userId) {
+                $business = businessDetails::find($userId);
+                $business->organisation_name = $inputs[$index]['organisation_name'];
+                $business->organisation_address = $inputs[$index]['organisation_address'];
+                $business->organisation_state = $inputs[$index]['organisation_state'];
+                $business->organisation_city = $inputs[$index]['organisation_city'];
+                $business->organisation_country = $inputs[$index]['organisation_country'];
+                $business->organisation_phone = $inputs[$index]['organisation_phone'];
+                $business->organisation_email = $inputs[$index]['organisation_email'];
+                $business->organisation_photos = $inputs[$index]['organisation_photos'];
+                $business->update();
+            }
+
+            return redirect('/account#business')->with('status', 'Business details updated successfully.');
+        }
+
+        public function deleteBusiness(Request $request, $id)
+        {
+            try {
+                businessDetails::where('id', $id)->delete();
+                return response()->json(['message' => 'Business member deleted successfully']);
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Failed to delete Business member'], 500);
+            }
         }
 
 

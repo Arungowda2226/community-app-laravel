@@ -27,9 +27,13 @@ Route::group(['as' => 'user.', 'middleware' => ['auth', 'password.expires', conf
         });
 
     Route::patch('profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/update/{id}', [AccountController::class, 'updateUser']);
     Route::post('/businessForm', [AccountController::class, 'store']);
     Route::delete('/delete/{id}', [AccountController::class, 'delete']);
     Route::post('/deleteFamily/{id}', [AccountController::class, 'deleteFamily']);
     Route::put('/updateFamily/{id}', [AccountController::class, 'updateFamaily']);
-    Route::put('/update/{id}', [AccountController::class, 'updateUser']);
+    Route::put('/updateBusiness/{id}', [AccountController::class, 'updateBusiness']);
+    // Route::post('/deleteBusiness/{id}', [AccountController::class, 'deleteBusiness'
+    Route::post('/deleteBusiness/{id}', [AccountController::class, 'deleteBusiness']);
+
 });
