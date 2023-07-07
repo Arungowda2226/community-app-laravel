@@ -134,12 +134,20 @@
                         </th>
                     </tr>
                     </table>
-                    <br> <br>
                 </div>
       </div>
+      <br>
       @endforeach
-                  <form method="POST" action="/familySumbit" enctype="multipart/form-data">
-                @csrf
+        <div class="text-center">
+        <button type="submit" class="btn btn-success col-md-2">UPDATE</button>
+        </div>
+   </form>
+       
+    @endif
+        </div>
+        <br>
+         <form method="POST" action="/familySumbit" enctype="multipart/form-data">
+            @csrf
                 <div id="formContainer">
                     <div class="form-section" id="mainForm">
                         <table class="table table-striped table-hover table-bordered mb-0">
@@ -198,16 +206,10 @@
                 <br><br>
                 <button type="button" id="addMoreFamily" class="btn btn-primary float-right">Add more +</button>
                 <br><br>
-                <button type="submit" class="btn btn-success col-md-2 float-right">Submit</button>
-                
+                <div class="text-center">
+                <button type="submit" class="btn btn-success col-md-2">Submit</button>
+                </div>
             </form>
-        <div class="text-center">
-        <button type="submit" class="btn btn-warning  float-left col-md-2">UPDATE</button>
-        </div>
-   </form>
-       
-    @endif
-    </div>
     
     <script>
          $(document).ready(function() {
