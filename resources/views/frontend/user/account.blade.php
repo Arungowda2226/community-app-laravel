@@ -114,15 +114,17 @@
                                 </div><!--tab-profile-->
 
                                 <div class="tab-pane fade pt-3" id="family" role="tabpanel" aria-labelledby="family-tab">
-                                    @include('frontend.user.account.tabs.familyDetails')
+                                    @include('frontend.user.account.tabs.familyDetails', ['family_details' => $family_details])
                                 </div><!--tab-family-->
 
+
                                 <div class="tab-pane fade pt-3" id="user" role="tabpanel" aria-labelledby="user-tab">
-                                    @include('frontend.user.account.tabs.user')
+                                    @include('frontend.user.account.tabs.user',['user_details'=>$user_details])
                                 </div><!--tab-information-->
 
                                 <div class="tab-pane fade pt-3" id="business" role="tabpanel" aria-labelledby="business-tab">
-                                    @include('frontend.user.account.tabs.business')
+                                    @include('frontend.user.account.tabs.business', ['business_details' => $business_details])
+                                   
 
                                 </div><!--tab-information-->
 

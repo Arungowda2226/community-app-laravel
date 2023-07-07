@@ -29,4 +29,7 @@ Route::group(['as' => 'user.', 'middleware' => ['auth', 'password.expires', conf
     Route::patch('profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/businessForm', [AccountController::class, 'store']);
     Route::delete('/delete/{id}', [AccountController::class, 'delete']);
+    Route::post('/deleteFamily/{id}', [AccountController::class, 'deleteFamily']);
+    Route::patch('/updateFamily', [AccountController::class, 'updateFam']);
+    Route::put('/update/{id}', [AccountController::class, 'updateUser']);
 });

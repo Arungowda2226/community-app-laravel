@@ -52,11 +52,7 @@ class BusinessDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'inputs.*.organisation_name' => 'required',
-            'inputs.*.organisation_address' => 'required',
-            // Add validation rules for other fields here
-        ]);
+    
 
         $user_id = Auth::id();
 
