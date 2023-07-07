@@ -30,6 +30,6 @@ Route::group(['as' => 'user.', 'middleware' => ['auth', 'password.expires', conf
     Route::post('/businessForm', [AccountController::class, 'store']);
     Route::delete('/delete/{id}', [AccountController::class, 'delete']);
     Route::post('/deleteFamily/{id}', [AccountController::class, 'deleteFamily']);
-    Route::patch('/updateFamily', [AccountController::class, 'updateFam']);
+    Route::put('/updateFamily/{id}', [AccountController::class, 'updateFamaily']);
     Route::put('/update/{id}', [AccountController::class, 'updateUser']);
 });
