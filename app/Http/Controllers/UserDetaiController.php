@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\user_detai;
+use App\Models\businessDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\family_details;
+
+
+
 
 class UserDetaiController extends Controller
 {
@@ -16,8 +21,11 @@ class UserDetaiController extends Controller
      */
     public function index()
     {
+      $user_id = Auth::id();
       $userDetails=user_detai::simplePaginate(10);
-      return view('frontend.allMemberList', compact('userDetails'));
+      $family_details=family_details::where('user_id', $user_id)->count();
+      $business_details=businessDetails::where('user_id', $user_id)->count();
+      return view('frontend.allMemberList', compact('userDetails','family_details','business_details'));
     }
 
     /**
@@ -25,9 +33,39 @@ class UserDetaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getBusinessDetails($userId)
     {
-        //
+        $Details = businessDetails::where('user_id', $userId)->get();
+
+        if ($Details->isEmpty()) {
+            return response()->json([
+                'status' => 404,
+                'message' => ' details not found',
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 200,
+            'Details' => $Details,
+        ], 200);    
+    }
+
+    public function getFamilyDetails($userId)
+    {
+        // Retrieve the family details for the given user ID
+        $familyDetails = family_details::where('user_id', $userId)->get();
+
+        if ($familyDetails->isEmpty()) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Family details not found',
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 200,
+            'familyDetails' => $familyDetails,
+        ], 200);
     }
 
     /**

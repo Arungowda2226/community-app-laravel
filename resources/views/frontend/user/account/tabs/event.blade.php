@@ -13,17 +13,17 @@
                 @csrf
                 <div id="formContainer">
                   <div class="form-group row">
-    <label for="photo" class="col-sm-4 col-form-label">Photo</label>
-    <div class="col-sm-4">
-        <input type="file" class="form-control" id="photo" name="inputs[0][Photo]" onchange="previewPhoto(event)">
-    </div>
-    <div class="col-sm-4">
-        <div class="mt-2">
-            <img id="photoPreview" src="#" alt="Photo Preview" style="max-width: 200px; max-height: 200px; border-radius: 50%;">
-        </div>
-    </div>
-</div>
-                    <div class="form-group row">
+                        <label for="photo" class="col-sm-4 col-form-label">Photo</label>
+                        <div class="col-sm-4">
+                            <input type="file" class="form-control" id="photo" name="inputs[0][Photo]" onchange="previewPhoto(event)">
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="mt-2">
+                                <img id="photoPreview" src="#" alt="Photo Preview" style="max-width: 200px; max-height: 200px; border-radius: 50%;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                         <label for="EventName" class="col-sm-4 col-form-label">Event Name</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" name="inputs[0][EventName]" placeholder="Enter Event Name">
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="NewAddress" class="col-sm-4 col-form-label">NewAddress</label>
+                        <label for="NewAddress" class="col-sm-4 col-form-label">Location</label>
                         <div class="col-sm-8">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -74,12 +74,16 @@
                         </div>
                     </div>
 
-                                    
-
                     <div class="form-group row">
                         <label for="BusFaciltiy" class="col-sm-4 col-form-label">Bus Faciltiy</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" name="inputs[0][BusFaciltiy]" placeholder="Enter Bus Faciltiy">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Public/Private" class="col-sm-4 col-form-label">Public/Private</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="inputs[0][Public_Private]" placeholder="Enter  Public/Private">
                         </div>
                     </div>
                    
@@ -89,7 +93,19 @@
                             <input type="text" class="form-control" name="inputs[0][EventPrice]" placeholder="">
                         </div>
                     </div>
+ 
                     <div class="form-group row">
+                    <label for="RegistrationRequired" class="col-sm-4 col-form-label">Registration Required</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" name="inputs[0][RegistrationRequired]">
+                            <option value="--">-----</option>
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
+                    </div>
+
+                    </div>
+                   <div class="form-group row">
                         <label for="Price Per Member Or Price Per Family" class="col-sm-4 col-form-label">Price Per Member Or Price Per Family</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" name="inputs[0][Public]">

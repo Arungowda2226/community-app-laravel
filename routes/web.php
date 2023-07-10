@@ -26,6 +26,13 @@ Route::get('allMember', 'UserDetaiController@index');
 Route::post('/familySumbit', 'FamilyDetailsController@store');
 Route::get('busin', 'UserDetaiController@allData');
 Route::get('allMember', 'UserDetaiController@index');
+Route::get('/family/{userId}', 'UserDetaiController@getFamilyDetails');
+Route::get('/Details/{userId}', [UserDetaiController::class, 'getBusinessDetails']);
+
+
+
+
+
 
 
 

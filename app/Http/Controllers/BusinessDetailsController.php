@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Cache;
+use App\Models\user_details;
 
 
 
@@ -21,7 +22,7 @@ class BusinessDetailsController extends Controller
         public function index()
         {
             $user_id = Auth::id();
-            $businessDetails = businessDetails::where('user_id', $user_id)->simplePaginate(2);
+            $businessDetails = user_details::where('user_id', $user_id)->simplePaginate(2);
             return view('frontend.memberList', compact('businessDetails'));
         }
 

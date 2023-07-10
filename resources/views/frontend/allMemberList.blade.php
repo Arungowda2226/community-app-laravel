@@ -3,9 +3,11 @@
 @section('title', __('My Account'))
 
 @section('content')
-<div >
-    <div >
-        <div >
+
+
+<div>
+    <div>
+        <div>
             <h1>Members List</h1>
             <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search by Name or Phone or Email" oninput="searchTable()" />
             <table class="table table-bordered data-table">
@@ -32,16 +34,16 @@
                         <th>OriginPincode</th>
                         <th>FamilyDetails</th>
                         <th>BusinessDetails</th>
-                        
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($userDetails as $user)
-                        <tr data-toggle="modal" data-target="#studentModal" onclick="showPopup({{ $user->id }})">
+                    
+                    <tr>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->father_name }}</td>
                         <td>{{ $user->mother_name }}</td>
-                        <td>{{ $user->photo }}</td>
+                        <td><img src="/img/{{ $user->photo }}" width="50px" height="50px" alt="img" /></td>
                         <td>{{ $user->phone }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->DOB }}</td>
@@ -57,35 +59,89 @@
                         <td>{{ $user->origin_state }}</td>
                         <td>{{ $user->origin_city }}</td>
                         <td>{{ $user->origin_pincode }}</td>
-                        <td></td>
-                        <td></td>
-                         </tr>
+                        <td><a href="#" data-toggle="modal" data-target="#familyModal" data-userid="{{ $user->id }}">{{ $family_details }}</a></td>
+                        <td><a href="#" data-toggle="modal" data-target="#businessModal" data-userid="{{ $user->id }}">{{ $business_details }}</a></td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
-            <div class="row">{{$userDetails->links()}}</div>
+            <div class="row">{{ $userDetails->links() }}</div>
         </div>
     </div>
 </div>
+
 <!-- modal pop-up -->
 <div class="modal fade" id="studentModal" tabindex="-1" role="dialog" aria-labelledby="studentModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <!-- Modal content -->
+</div>
+
+<!-- Family modal pop-up -->
+<div class="modal fade" id="familyModal" tabindex="-1" role="dialog" aria-labelledby="familyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 2000px;">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="studentModalLabel">Student Details</h5>
+                <h5 class="modal-title" id="familyModalLabel">Family Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" >
+                
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Relation</th>
+                            <th>Photo</th>
+                            <th>DOB</th>
+                            <th>Married</th>
+                            <th>Gender</th>
+                            <th>OriginCity</th>
+                            <!-- <th>BloodGroup</th> -->
+                        </tr>
+                    </thead>
+                    <tbody id="familyDetailsTable" class="table table-bordered" style="margin-bottom: 0;">
+                        <!-- Family details will be added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Business modal pop-up -->
+<div class="modal fade" id="businessModal" tabindex="-1" role="dialog" aria-labelledby="businessModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 20000px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="businessModalLabel">Business Details</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p><strong>OrganisationName:</strong> <span id="OrganisationName"></span></p>
-                <p><strong>OrganisationAddress:</strong> <span id="OrganisationAddress"></span></p>
-                <p><strong>OrganisationState:</strong> <span id="OrganisationState"></span></p>
-                <p><strong>OrganisationCity:</strong> <span id="OrganisationCity"></span></p>
-                <p><strong>OrganisationCountry:</strong> <span id="OrganisationCountry"></span></p>
-                <p><strong>OrganisationPhone:</strong> <span id="OrganisationPhone"></span></p>
-                <p><strong>OrganisationEmail:</strong> <span id="OrganisationEmail"></span></p>
-                <p><strong>OrganisationPhotos:</strong> <span id="OrganisationPhotos"></span></p>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>organisation_name</th>
+                            <th>organisation_address</th>
+                            <th>organisation_state</th>
+                            <th>organisation_city</th>
+                            <th>organisation_country</th>
+                            <th>organisation_phone</th>
+                            <th>organisation_email</th>
+                            <th>organisation_photos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="businessDetailsTable" class="table table-bordered" style="margin-bottom: 0;">
+                        <!-- Business details will be added dynamically here -->
+                    </tbody>
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -96,39 +152,12 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-function showPopup(userId) {
-    $.ajax({
-        url: '/user/' + userId,
-        method: 'GET',
-        success: function(response) {
-            if (response.status === 200) {
-                var user = response.user;
-                $('#OrganisationName').text(user.organisation_name);
-                $('#OrganisationAddress').text(user.organisation_address);
-                $('#OrganisationState').text(user.organisation_state);
-                $('#OrganisationCity').text(user.organisation_city);
-                $('#OrganisationCountry').text(user.organisation_country);
-                $('#OrganisationPhone').text(user.organisation_phone);
-                $('#OrganisationEmail').text(user.organisation_email);
-                $('#OrganisationPhotos').text(user.organisation_photos);
-
-                $('#studentModal').modal('show');
-            } else {
-                console.log('user not found');
-            }
-        },
-        error: function(error) {
-            console.log('Request failed');
-            console.log(error);
-        }
-    });
-}
-    function searchTable() {
+        function searchTable() {
         var searchText = $('#searchInput').val().toLowerCase();
-        $('table.data-table tbody tr').each(function () {
-            var userName = $(this).find('td:nth-child(3)').text().toLowerCase();
-            var userPhone = $(this).find('td:nth-child(8)').text().toLowerCase();
-            var userEmail = $(this).find('td:nth-child(9)').text().toLowerCase();
+        $('table.data-table tbody tr').each(function() {
+            var userName = $(this).find('td:nth-child(1)').text().toLowerCase();
+            var userPhone = $(this).find('td:nth-child(5)').text().toLowerCase();
+            var userEmail = $(this).find('td:nth-child(6)').text().toLowerCase();
             if (
                 userName.indexOf(searchText) !== -1 ||
                 userPhone.indexOf(searchText) !== -1 ||
@@ -140,6 +169,103 @@ function showPopup(userId) {
             }
         });
     }
+
+$(document).ready(function() {
+    $('#familyModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var userId = button.data('userid');
+
+        
+        // Perform AJAX request to fetch family details
+        $.ajax({
+            url: '/family/' + userId,
+            method: 'GET',
+            success: function(response) {
+                if (response.status === 200) {
+                    var familyDetails = response.familyDetails;
+                    var tableBody = $('#familyDetailsTable');
+
+                    tableBody.empty();
+
+                    for (var i = 0; i < familyDetails.length; i++) {
+                        var member = familyDetails[i];
+                        var imagePath = '/img/' + member.photo;
+                        console.log(imagePath);
+                        var row = '<tr>' +
+                            '<td>' + member.name + '</td>' +
+                            '<td>' + member.phone + '</td>' +
+                            '<td>' + member.email + '</td>' +
+                            '<td>' + member.relation + '</td>' +
+                            '<td><img src="' + imagePath + '" width="50px" height="50px" alt="img" /></td>' +
+                            '<td>' + member.DOB + '</td>' +
+                            '<td>' + member.married + '</td>' +
+                            '<td>' + member.gender + '</td>' +
+                            '<td>' + member.origin_city + '</td>' +
+                            // '<td>' + member.blood_group + '</td>' +
+                            '</tr>';
+
+                        tableBody.append(row);
+                    }
+                } else {
+                    console.log('Family details not found');
+                }
+            },
+            error: function(error) {
+                console.log('Request failed');
+                console.log(error);
+            }
+        });
+    });
+
+
+    $('#businessModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var userId = button.data('userid');
+        console.log(userId);
+        
+        // Perform AJAX request to fetch business details
+            $.ajax({
+            url: '/Details/' + userId,
+            method: 'GET',
+            success: function(response) {
+                console.log(response);
+                if (response.status === 200) {
+                    var businessDetails = response.Details;
+                    
+                    var tableBody = $('#businessDetailsTable');
+
+                    tableBody.empty();
+
+                    for (var i = 0; i < businessDetails.length; i++) {
+                        var business = businessDetails[i];
+                        var row = '<tr>' +
+                            '<td>' + business.organisation_name + '</td>' +
+                            '<td>' + business.organisation_address + '</td>' +
+                            '<td>' + business.organisation_state + '</td>' +
+                            '<td>' + business.organisation_city + '</td>' +
+                            '<td>' + business.organisation_country + '</td>' +
+                            '<td>' + business.organisation_phone + '</td>' +
+                            '<td>' + business.organisation_email + '</td>' +
+                            '<td>' + business.organisation_photos + '</td>' +
+                            
+                            '</tr>';
+
+                        tableBody.append(row);
+                    }
+                } else {
+                    console.log('Business details not found');
+                }
+            },
+            error: function(error) {
+                console.log('Request failed');
+                console.log(error);
+            }
+        });
+    });
+
+
+});
+
 
 
 </script>

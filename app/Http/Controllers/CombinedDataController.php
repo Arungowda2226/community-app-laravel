@@ -15,7 +15,8 @@ class CombinedDataController extends Controller
         $user_id = Auth::id();
         $businessDetails = BusinessDetails::where('user_id', $user_id)->get();
         $familyDetails = FamilyDetails::where('user_id', $user_id)->get();
-        $userDetails = UserDetails::where('user_id', $user_id)->get();
+        $userDetails = UserDetails::where('user_id', $user_id)->count();
+        echo "{{$userDetails}}";
 
         return view('combined', compact('businessDetails', 'familyDetails', 'userDetails'));
     }
