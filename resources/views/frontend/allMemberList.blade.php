@@ -3,8 +3,7 @@
 @section('title', __('My Account'))
 
 @section('content')
-
-
+<link rel="stylesheet" href="../../sass/frontend/allMemverList.scss">
 <div>
     <div>
         <div>
@@ -59,8 +58,8 @@
                         <td>{{ $user->origin_state }}</td>
                         <td>{{ $user->origin_city }}</td>
                         <td>{{ $user->origin_pincode }}</td>
-                        <td><a href="#" data-toggle="modal" data-target="#familyModal" data-userid="{{ $user->id }}">{{ $family_details }}</a></td>
-                        <td><a href="#" data-toggle="modal" data-target="#businessModal" data-userid="{{ $user->id }}">{{ $business_details }}</a></td>
+                        <td><a href="#" data-toggle="modal" data-target="#familyModal" data-userid="{{ $user->id }}">{{ $user->family_count }}</a></td>
+                        <td><a href="#" data-toggle="modal" data-target="#businessModal" data-userid="{{ $user->id }}">{{ $user->business_count }}</a></td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -116,7 +115,7 @@
 
 <!-- Business modal pop-up -->
 <div class="modal fade" id="businessModal" tabindex="-1" role="dialog" aria-labelledby="businessModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="width: 20000px">
+  <div class="modal-dialog modal-lg custom-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="businessModalLabel">Business Details</h5>
@@ -125,9 +124,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered table-spacing" style="width:100px">
                     <thead>
-                        <tr>
+                        <!-- <tr>
                             <th>organisation_name</th>
                             <th>organisation_address</th>
                             <th>organisation_state</th>
@@ -136,7 +135,7 @@
                             <th>organisation_phone</th>
                             <th>organisation_email</th>
                             <th>organisation_photos</th>
-                        </tr>
+                        </tr> -->
                     </thead>
                     <tbody id="businessDetailsTable" class="table table-bordered" style="margin-bottom: 0;">
                         <!-- Business details will be added dynamically here -->
@@ -190,7 +189,6 @@ $(document).ready(function() {
                     for (var i = 0; i < familyDetails.length; i++) {
                         var member = familyDetails[i];
                         var imagePath = '/img/' + member.photo;
-                        console.log(imagePath);
                         var row = '<tr>' +
                             '<td>' + member.name + '</td>' +
                             '<td>' + member.phone + '</td>' +
@@ -218,50 +216,74 @@ $(document).ready(function() {
     });
 
 
-    $('#businessModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget);
-        var userId = button.data('userid');
-        console.log(userId);
-        
-        // Perform AJAX request to fetch business details
-            $.ajax({
-            url: '/Details/' + userId,
-            method: 'GET',
-            success: function(response) {
-                console.log(response);
-                if (response.status === 200) {
-                    var businessDetails = response.Details;
-                    
-                    var tableBody = $('#businessDetailsTable');
+  $('#businessModal').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget);
+    var userId = button.data('userid');
+    console.log(userId);
+    
+    // Perform AJAX request to fetch business details
+    $.ajax({
+        url: '/Details/' + userId,
+        method: 'GET',
+        success: function(response) {
+            console.log(response);
+            if (response.status === 200) {
+                var businessDetails = response.Details;
+                var tableBody = $('#businessDetailsTable');
+               
+                
+                tableBody.empty();
 
-                    tableBody.empty();
+                for (var i = 0; i < businessDetails.length; i++) {
+                    var business = businessDetails[i];
+                     var busImagePath = '/img/' + business.organisation_photos;
+                    var row = '<tr>' +
+                        '<th>organisation_name</th>' +
+                        '<td>' + business.organisation_name + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<th>organisation_address</th>' +
+                        '<td>' + business.organisation_address + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<th>organisation_state</th>' +
+                        '<td>' + business.organisation_state + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<th>organisation_city</th>' +
+                        '<td>' + business.organisation_city + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<th>organisation_country</th>' +
+                        '<td>' + business.organisation_country + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<th>organisation_phone</th>' +
+                        '<td>' + business.organisation_phone + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<th>organisation_email</th>' +
+                        '<td>' + business.organisation_email + '</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<th>organisation_photos</th>' +
+                        '<td><img src="' + busImagePath + '" width="50px" height="50px" alt="img" /></td>' +
+                        '</tr>'+
+                        '<tr><td colspan="2"><br></td></tr>';
+                        
 
-                    for (var i = 0; i < businessDetails.length; i++) {
-                        var business = businessDetails[i];
-                        var row = '<tr>' +
-                            '<td>' + business.organisation_name + '</td>' +
-                            '<td>' + business.organisation_address + '</td>' +
-                            '<td>' + business.organisation_state + '</td>' +
-                            '<td>' + business.organisation_city + '</td>' +
-                            '<td>' + business.organisation_country + '</td>' +
-                            '<td>' + business.organisation_phone + '</td>' +
-                            '<td>' + business.organisation_email + '</td>' +
-                            '<td>' + business.organisation_photos + '</td>' +
-                            
-                            '</tr>';
-
-                        tableBody.append(row);
-                    }
-                } else {
-                    console.log('Business details not found');
+                    tableBody.append(row);
                 }
-            },
-            error: function(error) {
-                console.log('Request failed');
-                console.log(error);
+            } else {
+                console.log('Business details not found');
             }
-        });
+        },
+        error: function(error) {
+            console.log('Request failed');
+            console.log(error);
+        }
     });
+});
 
 
 });

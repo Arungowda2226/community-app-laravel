@@ -19,14 +19,20 @@ class UserDetaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-      $user_id = Auth::id();
-      $userDetails=user_detai::simplePaginate(10);
-      $family_details=family_details::where('user_id', $user_id)->count();
-      $business_details=businessDetails::where('user_id', $user_id)->count();
-      return view('frontend.allMemberList', compact('userDetails','family_details','business_details'));
+public function index()
+{
+    $userDetails = user_detai::simplePaginate(10);
+
+    foreach ($userDetails as $user) {
+        $family_details = family_details::where('user_id', $user->id)->count();
+        $business_details = businessDetails::where('user_id', $user->id)->count();
+        $user->family_count = $family_details;
+        $user->business_count = $business_details;
     }
+
+    return view('frontend.allMemberList', compact('userDetails'));
+}
+
 
     /**
      * Show the form for creating a new resource.
