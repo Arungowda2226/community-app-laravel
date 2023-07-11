@@ -15,7 +15,7 @@ class CreateFamilyDetailsTable extends Migration
     {
         Schema::create('family_details', function (Blueprint $table) {
             $table->id();
-             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('phone')->nullable();
             $table->string('email')->nullable();

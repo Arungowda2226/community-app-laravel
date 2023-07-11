@@ -5,6 +5,7 @@ use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\CheckUsersController;
 use App\Http\Controllers\BusinessDetailsController;
 use App\Http\Controllers\UserDetaiController;
+use App\Http\Controllers\EventController;
 
 /*
  * Global Routes
@@ -28,6 +29,9 @@ Route::get('busin', 'UserDetaiController@allData');
 Route::get('allMember', 'UserDetaiController@index');
 Route::get('/family/{userId}', 'UserDetaiController@getFamilyDetails');
 Route::get('/Details/{userId}', [UserDetaiController::class, 'getBusinessDetails']);
+Route::get('/event', [EventController::class, 'index']);
+Route::get('/eventForm', [EventController::class, 'store']);
+Route::get('/eventList', [EventController::class, 'show']);
 
 
 

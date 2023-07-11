@@ -1,7 +1,12 @@
+@extends('frontend.layouts.app')
+
+@section('title', __('My Account'))
+
+@section('content')
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Business Form</title>
+    <title>Event Form</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -14,15 +19,10 @@
                 <div id="formContainer">
                   <div class="form-group row">
                         <label for="photo" class="col-sm-4 col-form-label">Photo</label>
-                        <div class="col-sm-4">
-                            <input type="file" class="form-control" id="photo" name="inputs[0][photo]" onchange="previewPhoto(event)">
+                        <div class="col-sm-8">
+                            <input type="file" class="form-control" id="photo" name="inputs[0][photo]">
                         </div>
-                        <div class="col-sm-4">
-                            <div class="mt-2">
-                                <img id="photoPreview" src="#" alt="Photo Preview" style="max-width: 1x00px; max-height: 100px; ">
-                                </div>
-                            </div>
-                        </div>
+                  </div>
                         <div class="form-group row">
                         <label for="EventName" class="col-sm-4 col-form-label">Event Name</label>
                         <div class="col-sm-8">
@@ -130,25 +130,59 @@
                             <input type="text" class="form-control" name="inputs[0][price_per_family]" placeholder="Price Per Family">
                         </div>
                     </div>
-                </div>
 
+                    <div id="additionalPrice">
+                        <button type="button" onclick="addAdditionalPrice()">Additional Price</button>
+                        <br>
+                    </div>
+                </div>
+                <br>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+            
         </div>
     </div>
 </div>
+
+<script>
+    var additionalPriceCount = 0;
+
+    function addAdditionalPrice() {
+        additionalPriceCount++;
+
+        var additionalPriceContainer = document.getElementById("additionalPrice");
+        
+        var label1 = document.createElement("label");
+        label1.setAttribute("for", "Name" );
+        label1.className = "col-sm-4 col-form-label";
+        label1.textContent = "Name"  + ":";
+
+        var input1 = document.createElement("input");
+        input1.setAttribute("type", "text");
+        input1.className = "form-control";
+        input1.setAttribute("name", "inputs[0][additional_name_" + additionalPriceCount + "]");
+        input1.setAttribute("placeholder", "Name");
+
+        var label2 = document.createElement("label");
+        label2.setAttribute("for", "Price" );
+        label2.className = "col-sm-4 col-form-label";
+        label2.textContent = "Price " + ":";
+
+        var input2 = document.createElement("input");
+        input2.setAttribute("type", "text");
+        input2.className = "form-control";
+        input2.setAttribute("name", "inputs[0][additional_price_" + additionalPriceCount + "]");
+        input2.setAttribute("placeholder", "Additional Price");
+
+        additionalPriceContainer.appendChild(label1);
+        additionalPriceContainer.appendChild(input1);
+        additionalPriceContainer.appendChild(label2);
+        additionalPriceContainer.appendChild(input2);
+    }
+</script>
+
+
 </body>
 </html>
 
-<script>
-    function previewPhoto(event) {
-        var reader = new FileReader();
-        var photoPreview = document.getElementById('photoPreview');
-
-        reader.onload = function() {
-            photoPreview.src = reader.result;
-        }
-
-        reader.readAsDataURL(event.target.files[0]);
-    }
-</script>
+@endsection

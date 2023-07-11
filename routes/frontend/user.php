@@ -35,5 +35,7 @@ Route::group(['as' => 'user.', 'middleware' => ['auth', 'password.expires', conf
     Route::put('/updateBusiness/{id}', [AccountController::class, 'updateBusiness']);
     // Route::post('/deleteBusiness/{id}', [AccountController::class, 'deleteBusiness'
     Route::post('/deleteBusiness/{id}', [AccountController::class, 'deleteBusiness']);
+    Route::post('/eventForm', 'EventController@store')->name('eventForm.store');
+
 
 });

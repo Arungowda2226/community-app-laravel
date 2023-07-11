@@ -3,7 +3,7 @@
 @section('title', __('My Account'))
 
 @section('content')
-<link rel="stylesheet" href="../../sass/frontend/allMemverList.scss">
+<link rel="stylesheet" href="D:\xampp\htdocs\laravel-boilerplate-master-check\resources\sass\frontend\allMemverList.scss">
 <div>
     <div>
         <div>

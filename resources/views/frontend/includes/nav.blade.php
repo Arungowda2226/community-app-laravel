@@ -99,7 +99,8 @@
             </ul>
             <!-- <a href="/memberList" class="mr-2">MemberList</a> -->
             <a href="/allMember" class="ml-2">MemberList</a>
-            <!-- <a href="/busin" class="ml-2">AllMemberList</a> -->
+            <a href="/event" class="ml-2">Event</a>
+            <a href="/eventList" class="ml-2">EventList</a>
         </div><!--navbar-collapse-->
     </div><!--container-->
 </nav>
