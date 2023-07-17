@@ -5,10 +5,18 @@
 @section('content')
 
 </style>
+<!-- Add the WhatsApp API script -->
+<script src="https://cdn.jsdelivr.net/npm/@open-wa/wa-automate@1.9.2/dist/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@open-wa/wa-automate@1.9.2/dist/index.min.js"></script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUWbWu3SZRtS5T_LRFOFzAeHj9lMASJCM&libraries=places"></script>
+
 <div>
     <div>
         <div>
             <h1>Event List</h1>
+            <button onclick="inviteViaWhatsApp()">Invite</button>
             <div>
                 <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search by Name, Event Name, Address, or Event Date" oninput="searchTable()" />
                 <div class="input-group">
@@ -46,7 +54,7 @@
                 </thead>
                 <tbody>
                     @foreach($eventList as $event)
-                    <tr>
+                    <tr onclick="selectRow(this)">
                         <td><img src="{{ asset('storage/' . $event->photo) }}" alt="Event Photo" style="max-width: 100px; max-height: 100px;"></td>
                         <td>{{ $event->event_name }}</td>
                         <td>{{ $event->event_description }}</td>
@@ -70,11 +78,48 @@
                 </tbody>
             </table>
             {{$eventList->Links()}}
+            <div id="mapContainer"></div>
         </div>
     </div>
 </div>
 
+
+
 <script>
+    
+    function selectRow(row) {
+        var cells = row.getElementsByTagName("td");
+        var rowData = "";
+        for (var i = 0; i < cells.length; i++) {
+            rowData += cells[i].textContent + "\n";
+        }
+        var encodedData = encodeURIComponent(rowData);
+        var whatsappURL = "https://api.whatsapp.com/send?text=" + encodedData;
+        window.open(whatsappURL, "_blank");
+    }
+    
+
+    function inviteViaWhatsApp(){
+        console.log("hiii");
+}
+
+
+    function showMap(lat, lng) {
+        var mylatlng = {
+            lat: lat,
+            lng: lng
+        };
+
+        var map = new google.maps.Map(document.getElementById("mapContainer"), {
+            zoom: 5,
+            center: mylatlng,
+        });
+
+        new google.maps.Marker({
+            position: mylatlng,
+            map: map,
+        });
+    }
     function searchTable() {
         var input = document.getElementById("searchInput");
         var filter = input.value.toUpperCase();
@@ -121,5 +166,35 @@ function filterByDateRange() {
     }
 }
 
+function inviteViaWhatsApp() {
+    var selectedRow = document.querySelector('.data-table tr.selected'); // Get the selected row
+    if (!selectedRow) {
+        alert('Please select a row.'); // Show an alert if no row is selected
+        return;
+    }
+
+    var name = selectedRow.cells[6].innerHTML; // Get the name from the 7th cell
+    var address = selectedRow.cells[7].innerHTML; // Get the address from the 8th cell
+
+    // Prepare the message
+    var message = "Hello " + name + "! You are invited to the event at " + address + ". Please join us.";
+
+    // Create the WhatsApp API client
+    const client = new window['@open-wa/wa-automate'].default();
+
+    // Connect to WhatsApp
+    client
+        .create()
+        .then(() => {
+            // Send the invitation message
+            return client.sendTextMessage('PHONE_NUMBER', message); // Replace 'PHONE_NUMBER' with the recipient's phone number
+        })
+        .then(() => {
+            alert('Invitation sent successfully.'); // Show a success message
+        })
+        .catch((error) => {
+            console.error('Failed to send invitation:', error); // Show an error message
+        });
+}
 </script>
 @endsection

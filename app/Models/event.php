@@ -27,6 +27,10 @@ class event extends Model
         'event_price',
         'registration_required',
         'price_per_member',
-        'price_per_family'
+        'age<6_Price',
+        'age<18_Price',
+        'age>60_Price',
+        'addtional_name',
+        'addtional_price'
     ];
 }

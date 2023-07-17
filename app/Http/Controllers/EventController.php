@@ -52,13 +52,35 @@ public function store(Request $request)
         $value['registration_required'] = $request->input('inputs.'.$key.'.registration');
         $value['user_id'] = $user_id;
 
+        
+ 
+
+        // Store additional_name and additional_price
+        $additionalNames = $request->input('additional_name');
+        $additionalPrices = $request->input('additional_price');
+
+        $additionalData = [];
+        foreach ($additionalNames as $index => $name) {
+            $additionalData[] = [
+                'additional_name' => $name,
+                'additional_price' => $additionalPrices[$index],
+            ];
+        }
+
+        $value['addtional_name'] = implode(',', array_column($additionalData, 'additional_name'));
+        $value['addtional_price'] = implode(',', array_column($additionalData, 'additional_price'));
+
+
+
         event::create($value);
     }
 
-    // Store the values in the database as needed
-
     return redirect('/event')->with('flash_message', 'Event added successfully');
 }
+
+
+
+
 
 
     /**
@@ -69,7 +91,7 @@ public function store(Request $request)
      */
     public function show(event $event)
     {
-        $eventList=event::paginate(1);
+        $eventList=event::paginate(2);
         return view('frontend.eventList',compact('eventList'));
     }
 

@@ -33,7 +33,11 @@ class CreateEventsTable extends Migration
             $table->string('event_price')->nullable();
             $table->string('registration_required')->nullable();
             $table->string('price_per_member')->nullable();
-            $table->string('price_per_family')->nullable();
+            $table->string('age<6_Price')->nullable();
+            $table->string('age<18_Price')->nullable();
+            $table->string('age>60_Price')->nullable();
+            $table->string('addtional_name')->nullable();
+            $table->string('addtional_price')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

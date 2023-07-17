@@ -30,3 +30,9 @@ npm-debug.log
 output.txt
 Thumbs.db
 yarn-error.log
+
+# managed
+**.data.json
+**.node-persist**
+**_IGNORE_**
+# end managed

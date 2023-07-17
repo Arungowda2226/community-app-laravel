@@ -4,6 +4,16 @@
 
 @section('content')
 <link rel="stylesheet" href="D:\xampp\htdocs\laravel-boilerplate-master-check\resources\sass\frontend\allMemverList.scss">
+<style>
+    #photoModal img {
+        max-width: 100%;
+        max-height: 80vh;
+    }
+        #photoModalFamily .modal-dialog.modal-dialog-right {
+        margin-right: 0;
+        margin-left: auto;
+    }
+</style>
 <div>
     <div>
         <div>
@@ -42,7 +52,7 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->father_name }}</td>
                         <td>{{ $user->mother_name }}</td>
-                        <td><img src="/img/{{ $user->photo }}" width="50px" height="50px" alt="img" /></td>
+                        <td onclick="viewPhoto('/img/{{ $user->photo }}')"><img src="/img/{{ $user->photo }}" width="50px" height="50px" alt="img" /></td>
                         <td>{{ $user->phone }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->DOB }}</td>
@@ -68,7 +78,16 @@
         </div>
     </div>
 </div>
-
+<div id="photoModal" class="modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <img id="modalPhoto" src="" alt="photo" />
+            </div>
+            <button type="button" class="close" onclick="closePhoto()">&times;</button>
+        </div>
+    </div>
+</div>
 <!-- modal pop-up -->
 <div class="modal fade" id="studentModal" tabindex="-1" role="dialog" aria-labelledby="studentModalLabel" aria-hidden="true">
     <!-- Modal content -->
@@ -102,7 +121,17 @@
                         </tr>
                     </thead>
                     <tbody id="familyDetailsTable" class="table table-bordered" style="margin-bottom: 0;">
-                        <!-- Family details will be added dynamically here -->
+                    <div id="photoModalFamily" class="modal">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-right">
+                        <div class="modal-content">
+                            <div class="modal-body text-center">
+                                <img id="modalPhotoFamily" src="" alt="photo" />
+                            </div>
+                            <button type="button" class="close" onclick="closePhotoFamily()">&times;</button>
+                        </div>
+                    </div>
+                </div>
+    
                     </tbody>
                 </table>
             </div>
@@ -126,20 +155,20 @@
             <div class="modal-body">
                 <table class="table table-bordered table-spacing" style="width:100px">
                     <thead>
-                        <!-- <tr>
-                            <th>organisation_name</th>
-                            <th>organisation_address</th>
-                            <th>organisation_state</th>
-                            <th>organisation_city</th>
-                            <th>organisation_country</th>
-                            <th>organisation_phone</th>
-                            <th>organisation_email</th>
-                            <th>organisation_photos</th>
-                        </tr> -->
+
                     </thead>
                     <tbody id="businessDetailsTable" class="table table-bordered" style="margin-bottom: 0;">
-                        <!-- Business details will be added dynamically here -->
-                    </tbody>
+                    <div id="photoModalBusiness" class="modal">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-right">
+                        <div class="modal-content">
+                            <div class="modal-body text-center">
+                                <img id="modalPhotoBusiness" src="" alt="photo"/>
+                            </div>
+                            <button type="button" class="close" onclick="closePhotoBusiness()">&times;</button>
+                        </div>
+                    </div>
+                </div>
+                </tbody>
                 </table>
             </div>
             <div class="modal-footer">
@@ -149,9 +178,42 @@
     </div>
 </div>
 
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-        function searchTable() {
+
+    function viewPhoto(photoURL) {
+        document.getElementById("modalPhoto").src = photoURL;
+        document.getElementById("photoModal").style.display = "block";
+    }
+
+
+    function closePhoto() {
+        document.getElementById("photoModal").style.display = "none";
+    }
+
+    function closePhotoFamily() {
+        document.getElementById("photoModalFamily").style.display = "none";
+        document.getElementById("photoModal").style.display = "none";
+    }
+
+    function viewPhotoFamily(photoURLFamily) {
+        document.getElementById("modalPhotoFamily").src = photoURLFamily;
+        document.getElementById("photoModalFamily").style.display = "block";
+    }
+
+    function closePhotoBusiness() {
+        document.getElementById("photoModalBusiness").style.display = "none";
+        document.getElementById("photoModalBusiness").style.display = "none";
+    }
+
+    function viewPhotoBusiness(photoURLBusiness) {
+        document.getElementById("modalPhotoBusiness").src = photoURLBusiness;
+        document.getElementById("photoModalBusiness").style.display = "block";
+    }
+
+    function searchTable() {
         var searchText = $('#searchInput').val().toLowerCase();
         $('table.data-table tbody tr').each(function() {
             var userName = $(this).find('td:nth-child(1)').text().toLowerCase();
@@ -194,7 +256,7 @@ $(document).ready(function() {
                             '<td>' + member.phone + '</td>' +
                             '<td>' + member.email + '</td>' +
                             '<td>' + member.relation + '</td>' +
-                            '<td><img src="' + imagePath + '" width="50px" height="50px" alt="img" /></td>' +
+                            '<td onclick="viewPhotoFamily(\'' + imagePath + '\')"><img src="' + imagePath + '" width="50px" height="50px" alt="img" /></td>' +
                             '<td>' + member.DOB + '</td>' +
                             '<td>' + member.married + '</td>' +
                             '<td>' + member.gender + '</td>' +
@@ -267,7 +329,7 @@ $(document).ready(function() {
                         '</tr>' +
                         '<tr>' +
                         '<th>organisation_photos</th>' +
-                        '<td><img src="' + busImagePath + '" width="50px" height="50px" alt="img" /></td>' +
+                        '<td  onclick="viewPhotoBusiness(\'' + busImagePath + '\')"><img src="' + busImagePath + '" width="50px" height="50px" alt="img" /></td>' +
                         '</tr>'+
                         '<tr><td colspan="2"><br></td></tr>';
                         

@@ -11,7 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<div class="container">
+<div class="container border border-dark" >
     <div class="row">
         <div class="col-md-6 mx-auto mt-5">
             <form method="POST" action="/eventForm" enctype="multipart/form-data">
@@ -26,31 +26,31 @@
                         <div class="form-group row">
                         <label for="EventName" class="col-sm-4 col-form-label">Event Name</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[0][event_name]" placeholder="Enter Event Name">
+                            <input type="text" class="form-control border border-dark" name="inputs[0][event_name]" placeholder="Enter Event Name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="EventDescription" class="col-sm-4 col-form-label">Event Description</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[0][event_description]" placeholder="Enter Event Description">
+                            <input type="text" class="form-control border border-dark" name="inputs[0][event_description]" placeholder="Enter Event Description">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="EventDescription" class="col-sm-4 col-form-label">Registration Start Date</label>
                         <div class="col-sm-8">
-                            <input type="date" class="form-control" name="inputs[0][registration_start_date]" >
+                            <input type="date" class="form-control border border-dark" name="inputs[0][registration_start_date]" >
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="EventDescription" class="col-sm-4 col-form-label">Registration End Date</label>
                         <div class="col-sm-8">
-                            <input type="date" class="form-control" name="inputs[0][registration_end_date]">
+                            <input type="date" class="form-control border border-dark" name="inputs[0][registration_end_date]">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="EventDateAndTime" class="col-sm-4 col-form-label">Event Date and Time</label>
                         <div class="col-sm-8">
-                            <input type="datetime-local" class="form-control" name="inputs[0][event_date_time]" placeholder="Enter Event Date and Time">
+                            <input type="datetime-local" class="form-control border border-dark" name="inputs[0][event_date_time]" placeholder="Enter Event Date and Time">
                         </div>
                     </div>
 
@@ -60,27 +60,27 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="" class="col-form-label">Name</label>
-                                    <input type="text" class="form-control" name="inputs[0][name]" placeholder="Enter First Name">
+                                    <input type="text" class="form-control border border-dark" name="inputs[0][name]" placeholder="Enter First Name">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="" class="col-form-label">Address</label>
-                                    <input type="text" class="form-control" name="inputs[0][address]" placeholder="Enter Address">
+                                    <input type="text" class="form-control border border-dark" name="inputs[0][address]" placeholder="Enter Address">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="" class="col-form-label">City</label>
-                                    <input type="text" class="form-control" name="inputs[0][city]" placeholder="Enter City">
+                                    <input type="text" class="form-control border border-dark" name="inputs[0][city]" placeholder="Enter City">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="" class="col-form-label">State</label>
-                                    <input type="text" class="form-control" name="inputs[0][state]" placeholder="Enter State">
+                                    <input type="text" class="form-control border border-dark" name="inputs[0][state]" placeholder="Enter State">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="" class="col-form-label">Country</label>
-                                    <input type="text" class="form-control" name="inputs[0][country]" placeholder="Enter Country">
+                                    <input type="text" class="form-control border border-dark" name="inputs[0][country]" placeholder="Enter Country">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="" class="col-form-label">Pincode</label>
-                                    <input type="text" class="form-control" name="inputs[0][pincode]" placeholder="Enter Pincode">
+                                    <input type="text" class="form-control border border-dark" name="inputs[0][pincode]" placeholder="Enter Pincode">
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                     <div class="form-group row">
                         <label for="BusFaciltiy" class="col-sm-4 col-form-label">Bus Faciltiy</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[0][bus_facility]" placeholder="Enter Bus Faciltiy">
+                            <input type="text" class="form-control border border-dark" name="inputs[0][bus_facility]" placeholder="Enter Bus Faciltiy">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -101,14 +101,12 @@
                             <label for="Private">Private</label><br>
                         </div>
                     </div>
-                   
                     <div class="form-group row">
                         <label for="Event Price" class="col-sm-4 col-form-label">Event Price</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[0][event_price]" placeholder="0 consider as free">
+                            <input type="text" class="form-control border border-dark" name="inputs[0][event_price]" placeholder="0 consider as free">
                         </div>
                     </div>
- 
                     <div class="form-group row">
                         <label for="registration" class="col-sm-4 col-form-label">Registration</label>
                         <div class="col-sm-8">
@@ -121,20 +119,31 @@
                    <div class="form-group row">
                         <label for="Price Per Member Or Price Per Family" class="col-sm-4 col-form-label">Price Per Member</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[0][price_per_member]" placeholder="Price Per Member">
+                            <input type="text" class="form-control border border-dark" name="inputs[0][price_per_member]" placeholder="Price Per Member">
                         </div>
                     </div>
                    <div class="form-group row">
-                        <label for="Price Per Member Or Price Per Family" class="col-sm-4 col-form-label">Price Per Family</label>
+                        <label for="Price Per Member Or Price Per Family" class="col-sm-4 col-form-label">age<6 Price</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="inputs[0][price_per_family]" placeholder="Price Per Family">
+                            <input type="text" class="form-control border border-dark" name="inputs[0][age<6_Price]" placeholder="Price below 6 year">
                         </div>
                     </div>
-
-                    <div id="additionalPrice">
-                        <button type="button" onclick="addAdditionalPrice()">Additional Price</button>
-                        <br>
+                    <div class="form-group row">
+                        <label for="18belowPrice" class="col-sm-4 col-form-label">age<18 Price</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control border border-dark" name="inputs[0][age<18_Price]" placeholder="price below 5 year">
+                        </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="60abovePrice" class="col-sm-4 col-form-label">age>60 Price</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control border border-dark" name="inputs[0][age>60_Price]" placeholder="Price above 60 year">
+                        </div>
+                    </div>
+                    <div id="addition">
+                        <!-- Additional input fields will be added dynamically here -->
+                    </div>
+                    <button type="button" class="btn btn-warning" onclick="addForm()">Add</button>
                 </div>
                 <br>
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -143,46 +152,45 @@
         </div>
     </div>
 </div>
-
-<script>
-    var additionalPriceCount = 0;
-
-    function addAdditionalPrice() {
-        additionalPriceCount++;
-
-        var additionalPriceContainer = document.getElementById("additionalPrice");
-        
-        var label1 = document.createElement("label");
-        label1.setAttribute("for", "Name" );
-        label1.className = "col-sm-4 col-form-label";
-        label1.textContent = "Name"  + ":";
-
-        var input1 = document.createElement("input");
-        input1.setAttribute("type", "text");
-        input1.className = "form-control";
-        input1.setAttribute("name", "inputs[0][additional_name_" + additionalPriceCount + "]");
-        input1.setAttribute("placeholder", "Name");
-
-        var label2 = document.createElement("label");
-        label2.setAttribute("for", "Price" );
-        label2.className = "col-sm-4 col-form-label";
-        label2.textContent = "Price " + ":";
-
-        var input2 = document.createElement("input");
-        input2.setAttribute("type", "text");
-        input2.className = "form-control";
-        input2.setAttribute("name", "inputs[0][additional_price_" + additionalPriceCount + "]");
-        input2.setAttribute("placeholder", "Additional Price");
-
-        additionalPriceContainer.appendChild(label1);
-        additionalPriceContainer.appendChild(input1);
-        additionalPriceContainer.appendChild(label2);
-        additionalPriceContainer.appendChild(input2);
-    }
-</script>
-
-
 </body>
+<script>
+var countEvent = 0;
+
+function addForm() {
+    var additionalDetails = `
+    <div id="form-${countEvent}" class="additional-form">
+        <div class="form-group row">
+            <label for="additional_name" class="col-sm-4 col-form-label">Name</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control border border-dark" name="additional_name[]" placeholder="Additional name">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="additional_price" class="col-sm-4 col-form-label">Price</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control border border-dark" name="additional_price[]" placeholder="Additional price">
+            </div>
+        </div>
+        <button class="btn btn-danger" onclick="removeForm(${countEvent})">Remove</button>
+    </div>
+    <br/>
+    `;
+
+    document.getElementById("addition").insertAdjacentHTML('beforeend', additionalDetails);
+    countEvent++;
+}
+
+function removeForm(formId) {
+    var formToRemove = document.getElementById(`form-${formId}`);
+    if (formToRemove) {
+        formToRemove.remove();
+    }
+}
+
+
+</script>
 </html>
 
 @endsection
+
+
