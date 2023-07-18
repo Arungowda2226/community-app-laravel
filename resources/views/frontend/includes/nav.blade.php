@@ -101,6 +101,7 @@
             <a href="/allMember" class="ml-2">MemberList</a>
             <a href="/event" class="ml-2">Event</a>
             <a href="/eventList" class="ml-2">EventList</a>
+            <!-- <a href="/paymentGateway" class="ml-2">checkOut</a> -->
         </div><!--navbar-collapse-->
     </div><!--container-->
 </nav>
